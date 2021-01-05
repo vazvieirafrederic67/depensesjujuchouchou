@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depenses index{% endblock %}
+
+{% block body %}
+    <h1>Depenses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Montant</th>
+                <th>Category</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for depense in depenses %}
+            <tr>
+                <td>{{ depense.montant }}</td>
+
+                <td>{{ depense.category.category }}</td>
+
+                <td>{{ depense.createdAt ? depense.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('depenses_show', {'id': depense.id}) }}">show</a>
+                    <a href="{{ path('depenses_edit', {'id': depense.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('depenses_new') }}">Create new</a>
+{% endblock %}
